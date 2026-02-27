@@ -1,0 +1,68 @@
+name: Bloomberg TV
+description: Bloomberg Television is a 24-hour financial and business news network providing live market updates, analysis, and interviews with industry leaders.
+image: https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQDZ0hP4wPmI/v0/1200x675.jpg
+tags:
+- financial news
+- business television
+- market data
+- live streaming
+- business news
+created: '2024'
+modified: '2024'
+url: https://www.bloomberg.com/live
+apis:
+- name: Bloomberg TV Live Stream
+  description: Access to Bloomberg Television live streaming content
+  image: https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQDZ0hP4wPmI/v0/1200x675.jpg
+  humanURL: https://www.bloomberg.com/live/us
+  baseURL: https://www.bloomberg.com/media-manifest
+  tags:
+  - live stream
+  - video
+  - television
+  properties:
+  - type: Documentation
+    url: https://www.bloomberg.com/live
+  - type: OpenAPI
+    url: https://api.bloomberg.com/tv/stream
+  contact:
+  - FN: Bloomberg Media
+    email: feedback@bloomberg.net
+    url: https://www.bloomberg.com/contact
+- name: Bloomberg TV Schedule
+  description: API for retrieving Bloomberg TV programming schedule
+  humanURL: https://www.bloomberg.com/live/us
+  baseURL: https://www.bloomberg.com/api
+  tags:
+  - schedule
+  - programming
+  - television
+  properties:
+  - type: Documentation
+    url: https://www.bloomberg.com/live/schedule
+  - type: OpenAPI
+    url: https://api.bloomberg.com/tv/schedule
+- name: Bloomberg Video On Demand
+  description: Access to Bloomberg TV video archive and on-demand content
+  humanURL: https://www.bloomberg.com/live/us
+  baseURL: https://www.bloomberg.com/api
+  tags:
+  - video
+  - on-demand
+  - archive
+  properties:
+  - type: Documentation
+    url: https://www.bloomberg.com/videos
+  - type: OpenAPI
+    url: https://api.bloomberg.com/tv/vod
+maintainers:
+- FN: Bloomberg L.P.
+  email: feedback@bloomberg.net
+  url: https://www.bloomberg.com
+common:
+- type: Terms of Service
+  url: https://www.bloomberg.com/notices/tos
+- type: Privacy Policy
+  url: https://www.bloomberg.com/notices/privacy
+- type: Support
+  url: https://www.bloomberg.com/contact
