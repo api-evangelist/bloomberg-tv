@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.bloomberg.com/schemas/bloomberg-tv-video.json",
+  "title": "Bloomberg TV Video",
+  "description": "Represents a Bloomberg TV video content item from the on-demand library, including clips, interviews, show segments, documentaries, and original series episodes. Contains metadata for discovery, playback, and categorization.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the video",
+      "examples": [
+        "v-2026-03-04-surveillance-clip-01"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the video",
+      "examples": [
+        "Fed Chair Powell Signals Patience on Rate Cuts"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Description or summary of the video content",
+      "examples": [
+        "Federal Reserve Chair Jerome Powell discusses the economic outlook and signals a cautious approach to interest rate adjustments during Bloomberg Surveillance."
+      ]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the video in seconds",
+      "minimum": 0,
+      "examples": [
+        342
+      ]
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Publication timestamp in ISO 8601 format",
+      "examples": [
+        "2026-03-04T08:30:00-05:00"
+      ]
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last updated timestamp in ISO 8601 format",
+      "examples": [
+        "2026-03-04T08:35:00-05:00"
+      ]
+    },
+    "thumbnailUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the video thumbnail image",
+      "examples": [
+        "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/example/v0/1200x675.jpg"
+      ]
+    },
+    "videoUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the video page on Bloomberg",
+      "examples": [
+        "https://www.bloomberg.com/video/fed-chair-powell-signals-patience"
+      ]
+    },
+    "show": {
+      "type": "string",
+      "description": "Name of the associated show if applicable",
+      "examples": [
+        "Bloomberg Surveillance"
+      ]
+    },
+    "showSlug": {
+      "type": "string",
+      "description": "URL slug of the associated show",
+      "examples": [
+        "bloomberg-surveillance"
+      ]
+    },
+    "topics": {
+      "type": "array",
+      "description": "Topics or tags associated with the video for content discovery",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "Federal Reserve",
+          "Interest Rates",
+          "Monetary Policy"
+        ]
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Primary content category",
+      "enum": [
+        "Markets",
+        "Finance",
+        "Technology",
+        "Politics",
+        "Economics",
+        "Originals",
+        "Interviews"
+      ],
+      "examples": [
+        "Markets"
+      ]
+    },
+    "participants": {
+      "type": "array",
+      "description": "People featured in the video including hosts, guests, and correspondents",
+      "items": {
+        "$ref": "#/$defs/Participant"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "duration"
+  ],
+  "$defs": {
+    "Participant": {
+      "type": "object",
+      "description": "A person featured in a video",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the participant",
+          "examples": [
+            "Jerome Powell"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "description": "Professional role or title of the participant",
+          "examples": [
+            "Federal Reserve Chair"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Participant type in the video",
+          "enum": [
+            "host",
+            "guest",
+            "correspondent"
+          ],
+          "examples": [
+            "guest"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  }
+}

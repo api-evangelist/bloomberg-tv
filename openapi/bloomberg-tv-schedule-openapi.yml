@@ -1,0 +1,380 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg TV Schedule API
+  description: >-
+    Provides access to Bloomberg TV programming schedule data across
+    regional broadcasts including US, Europe, and Asia. Returns daily
+    programming lineups with show times, descriptions, hosts, and
+    episode details. Bloomberg TV programming includes shows such as
+    Bloomberg Surveillance, Bloomberg Markets, Bloomberg Technology,
+    Bloomberg Daybreak, and Bloomberg The Close, among others. Schedule
+    data is available for the current day and upcoming programming.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Media
+    email: feedback@bloomberg.net
+    url: https://www.bloomberg.com/contact
+  license:
+    name: Bloomberg Terms of Service
+    url: https://www.bloomberg.com/notices/tos
+  termsOfService: https://www.bloomberg.com/notices/tos
+servers:
+  - url: https://www.bloomberg.com
+    description: Bloomberg Web Platform
+externalDocs:
+  description: Bloomberg TV Schedule
+  url: https://www.bloomberg.com/live/schedule
+tags:
+  - name: Schedule
+    description: Programming schedule endpoints
+  - name: Shows
+    description: Show catalog and metadata
+paths:
+  /live/schedule/{region}:
+    get:
+      operationId: getScheduleByRegion
+      summary: Get TV schedule for a specific region
+      description: >-
+        Retrieves the Bloomberg TV programming schedule for a given
+        regional broadcast. Returns the daily lineup of shows with
+        air times, durations, descriptions, and host information.
+        Schedule data reflects the current broadcast day and may
+        include upcoming programming for the next broadcast period.
+        Regions include US (BTV+), Europe, and Asia.
+      tags:
+        - Schedule
+      parameters:
+        - name: region
+          in: path
+          required: true
+          description: >-
+            Regional broadcast identifier. US covers North American
+            programming, Europe covers EMEA programming, and Asia
+            covers Asia-Pacific programming.
+          schema:
+            type: string
+            enum:
+              - us
+              - europe
+              - asia
+          example: us
+      responses:
+        '200':
+          description: Schedule data returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: >-
+                  HTML page containing structured schedule data with
+                  programming lineup information embedded in the page
+                  content.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+        '404':
+          description: Schedule not found for the specified region
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /live/schedule-shows:
+    get:
+      operationId: getScheduleShows
+      summary: Get all scheduled shows
+      description: >-
+        Retrieves a consolidated listing of all Bloomberg TV shows
+        that appear in the programming schedule. Provides metadata
+        about each show including title, description, typical air
+        times, and associated hosts or anchors.
+      tags:
+        - Schedule
+        - Shows
+      responses:
+        '200':
+          description: List of scheduled shows returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page containing show listing data.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowListResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /live/shows:
+    get:
+      operationId: getAllShows
+      summary: Get catalog of all Bloomberg TV shows
+      description: >-
+        Retrieves the complete catalog of Bloomberg TV shows and
+        series. Includes both currently airing and archived shows
+        with metadata such as title, description, category, hosts,
+        and links to show-specific pages and video archives.
+      tags:
+        - Shows
+      responses:
+        '200':
+          description: Show catalog returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page containing the complete show catalog.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowListResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /btv/series/{showSlug}:
+    get:
+      operationId: getShowBySlug
+      summary: Get details for a specific show
+      description: >-
+        Retrieves detailed information about a specific Bloomberg TV
+        show or series identified by its URL slug. Returns show
+        metadata including title, description, hosts, schedule,
+        and links to recent episodes and clips.
+      tags:
+        - Shows
+      parameters:
+        - name: showSlug
+          in: path
+          required: true
+          description: >-
+            URL-friendly slug identifier for the show. Examples
+            include bloomberg-surveillance, bloomberg-markets,
+            bloomberg-technology, bloomberg-daybreak-asia.
+          schema:
+            type: string
+          example: bloomberg-surveillance
+      responses:
+        '200':
+          description: Show details returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with detailed show information.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Show'
+        '404':
+          description: Show not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ScheduleResponse:
+      type: object
+      description: Programming schedule response for a regional broadcast
+      properties:
+        region:
+          type: string
+          description: Regional broadcast identifier
+          enum:
+            - us
+            - europe
+            - asia
+          example: us
+        date:
+          type: string
+          format: date
+          description: Broadcast date for the schedule
+          example: '2026-03-04'
+        timezone:
+          type: string
+          description: Timezone for the schedule times
+          example: America/New_York
+        programs:
+          type: array
+          description: Ordered list of programs in the schedule
+          items:
+            $ref: '#/components/schemas/ScheduleEntry'
+      required:
+        - region
+        - date
+        - programs
+    ScheduleEntry:
+      type: object
+      description: A single program entry in the schedule
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the schedule entry
+          example: sched-2026-03-04-surveillance-0600
+        showId:
+          type: string
+          description: Identifier for the associated show
+          example: bloomberg-surveillance
+        title:
+          type: string
+          description: Title of the program airing in this time slot
+          example: Bloomberg Surveillance
+        description:
+          type: string
+          description: Description of the episode or program
+          example: >-
+            Jonathan Ferro, Lisa Abramowicz and Annmarie Hordern
+            cover the latest in global markets, economics, and
+            geopolitics with interviews from industry leaders.
+        startTime:
+          type: string
+          format: date-time
+          description: Scheduled start time in ISO 8601 format
+          example: '2026-03-04T06:00:00-05:00'
+        endTime:
+          type: string
+          format: date-time
+          description: Scheduled end time in ISO 8601 format
+          example: '2026-03-04T09:00:00-05:00'
+        duration:
+          type: integer
+          description: Duration of the program in minutes
+          example: 180
+        hosts:
+          type: array
+          description: List of hosts or anchors for the program
+          items:
+            type: string
+          example:
+            - Jonathan Ferro
+            - Lisa Abramowicz
+            - Annmarie Hordern
+        isLive:
+          type: boolean
+          description: Whether this is a live broadcast or a replay
+          example: true
+        showUrl:
+          type: string
+          format: uri
+          description: URL to the show page
+          example: https://www.bloomberg.com/btv/series/bloomberg-surveillance
+      required:
+        - title
+        - startTime
+        - endTime
+    ShowListResponse:
+      type: object
+      description: Response containing a list of shows
+      properties:
+        shows:
+          type: array
+          description: List of Bloomberg TV shows
+          items:
+            $ref: '#/components/schemas/Show'
+        total:
+          type: integer
+          description: Total number of shows
+          example: 25
+    Show:
+      type: object
+      description: Bloomberg TV show or series metadata
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the show
+          example: bloomberg-surveillance
+        slug:
+          type: string
+          description: URL-friendly slug for the show
+          example: bloomberg-surveillance
+        title:
+          type: string
+          description: Display title of the show
+          example: Bloomberg Surveillance
+        description:
+          type: string
+          description: Full description of the show
+          example: >-
+            Connecting the dots across business, finance, economics
+            and politics with conversations with leaders from Wall
+            Street to Washington and beyond.
+        category:
+          type: string
+          description: Category or genre of the show
+          enum:
+            - Markets
+            - Finance
+            - Technology
+            - Politics
+            - Economics
+            - Originals
+          example: Markets
+        hosts:
+          type: array
+          description: Regular hosts or anchors of the show
+          items:
+            type: string
+          example:
+            - Jonathan Ferro
+            - Lisa Abramowicz
+            - Annmarie Hordern
+        region:
+          type: string
+          description: Primary regional broadcast for this show
+          enum:
+            - us
+            - europe
+            - asia
+            - global
+          example: us
+        schedule:
+          type: string
+          description: Typical air schedule description
+          example: Weekdays 6:00 AM - 9:00 AM ET
+        imageUrl:
+          type: string
+          format: uri
+          description: URL to the show thumbnail or promotional image
+        url:
+          type: string
+          format: uri
+          description: URL to the show page
+          example: https://www.bloomberg.com/btv/series/bloomberg-surveillance
+        isActive:
+          type: boolean
+          description: Whether the show is currently in production
+          example: true
+      required:
+        - id
+        - title
+    Error:
+      type: object
+      description: Error response
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 404
+        message:
+          type: string
+          description: Human-readable error message
+          example: Schedule not found for region
+        code:
+          type: string
+          description: Machine-readable error code
+          example: NOT_FOUND

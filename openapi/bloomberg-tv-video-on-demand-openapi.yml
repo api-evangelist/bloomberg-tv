@@ -1,0 +1,527 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Video On Demand API
+  description: >-
+    Provides access to Bloomberg TV's video archive and on-demand content
+    library. Includes show clips, full interviews, documentaries, and
+    original series from the Bloomberg video catalog. Content is organized
+    by shows, topics, and categories spanning markets, finance, technology,
+    politics, and economics. The video library includes content from
+    Bloomberg Television, Bloomberg Originals, and Bloomberg Quicktakes.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Media
+    email: feedback@bloomberg.net
+    url: https://www.bloomberg.com/contact
+  license:
+    name: Bloomberg Terms of Service
+    url: https://www.bloomberg.com/notices/tos
+  termsOfService: https://www.bloomberg.com/notices/tos
+servers:
+  - url: https://www.bloomberg.com
+    description: Bloomberg Web Platform
+externalDocs:
+  description: Bloomberg Videos
+  url: https://www.bloomberg.com/videos
+tags:
+  - name: Videos
+    description: Video content discovery and retrieval
+  - name: Series
+    description: Original series and show episodes
+  - name: Categories
+    description: Video category browsing
+paths:
+  /videos:
+    get:
+      operationId: listVideos
+      summary: List available video content
+      description: >-
+        Retrieves a paginated listing of Bloomberg video content including
+        recent clips, interviews, show segments, and featured videos.
+        Content is sorted by recency by default and can be filtered by
+        topic or category. Includes videos from Bloomberg Television
+        broadcasts, Bloomberg Originals series, and standalone content.
+      tags:
+        - Videos
+      parameters:
+        - name: topic
+          in: query
+          required: false
+          description: >-
+            Filter videos by topic or subject area such as markets,
+            technology, politics, or economics.
+          schema:
+            type: string
+          example: markets
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          example: 1
+        - name: limit
+          in: query
+          required: false
+          description: Number of videos per page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+          example: 20
+      responses:
+        '200':
+          description: Video listing returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with video listing and embedded metadata.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoListResponse'
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /video/{videoId}:
+    get:
+      operationId: getVideoById
+      summary: Get a specific video by identifier
+      description: >-
+        Retrieves detailed metadata and playback information for a
+        specific video identified by its unique video ID or slug.
+        Returns video title, description, duration, publish date,
+        associated show, thumbnail images, and playback URLs.
+      tags:
+        - Videos
+      parameters:
+        - name: videoId
+          in: path
+          required: true
+          description: Unique identifier or URL slug for the video
+          schema:
+            type: string
+          example: bloomberg-surveillance-03-04-2026
+      responses:
+        '200':
+          description: Video details returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with video player and metadata.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /originals:
+    get:
+      operationId: listOriginalSeries
+      summary: List Bloomberg Originals series
+      description: >-
+        Retrieves the catalog of Bloomberg Originals video series.
+        Bloomberg Originals are documentary-style and feature series
+        produced by Bloomberg Media covering topics such as technology,
+        business innovation, culture, and global economics. Each series
+        contains multiple episodes available for on-demand viewing.
+      tags:
+        - Series
+      responses:
+        '200':
+          description: Originals series listing returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with series catalog.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesListResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /originals/{seriesSlug}:
+    get:
+      operationId: getOriginalSeriesBySlug
+      summary: Get details for a specific Originals series
+      description: >-
+        Retrieves detailed information and episode listing for a
+        specific Bloomberg Originals series identified by its URL
+        slug. Returns series metadata, episode list with descriptions,
+        durations, and playback information.
+      tags:
+        - Series
+      parameters:
+        - name: seriesSlug
+          in: path
+          required: true
+          description: URL-friendly slug identifier for the series
+          schema:
+            type: string
+          example: bloomberg-technology
+      responses:
+        '200':
+          description: Series details returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with series details and episodes.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Series'
+        '404':
+          description: Series not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /originals/{seriesSlug}/{episodeSlug}:
+    get:
+      operationId: getOriginalEpisode
+      summary: Get a specific Originals episode
+      description: >-
+        Retrieves detailed metadata and playback information for a
+        specific episode within a Bloomberg Originals series. Returns
+        episode title, description, duration, publish date, thumbnail
+        images, and video playback data.
+      tags:
+        - Series
+      parameters:
+        - name: seriesSlug
+          in: path
+          required: true
+          description: URL-friendly slug identifier for the series
+          schema:
+            type: string
+          example: bloomberg-technology
+        - name: episodeSlug
+          in: path
+          required: true
+          description: URL-friendly slug identifier for the episode
+          schema:
+            type: string
+          example: ai-revolution-episode-1
+      responses:
+        '200':
+          description: Episode details returned successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with episode player and metadata.
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Episode'
+        '404':
+          description: Episode not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    VideoListResponse:
+      type: object
+      description: Paginated list of videos
+      properties:
+        videos:
+          type: array
+          description: List of video items
+          items:
+            $ref: '#/components/schemas/Video'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        total:
+          type: integer
+          description: Total number of matching videos
+          example: 1500
+    Video:
+      type: object
+      description: A Bloomberg video content item
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the video
+          example: v-2026-03-04-surveillance-clip-01
+        title:
+          type: string
+          description: Title of the video
+          example: >-
+            Fed Chair Powell Signals Patience on Rate Cuts
+        description:
+          type: string
+          description: Description or summary of the video content
+          example: >-
+            Federal Reserve Chair Jerome Powell discusses the
+            economic outlook and signals a cautious approach
+            to interest rate adjustments during Bloomberg
+            Surveillance.
+        duration:
+          type: integer
+          description: Duration of the video in seconds
+          example: 342
+        publishedAt:
+          type: string
+          format: date-time
+          description: Publication timestamp in ISO 8601 format
+          example: '2026-03-04T08:30:00-05:00'
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last updated timestamp
+          example: '2026-03-04T08:35:00-05:00'
+        thumbnailUrl:
+          type: string
+          format: uri
+          description: URL to the video thumbnail image
+          example: https://assets.bwbx.io/images/users/iqjWHBFdfxIU/example/v0/1200x675.jpg
+        videoUrl:
+          type: string
+          format: uri
+          description: URL to the video page
+          example: https://www.bloomberg.com/video/fed-chair-powell-signals-patience
+        show:
+          type: string
+          description: Associated show name if applicable
+          example: Bloomberg Surveillance
+        showSlug:
+          type: string
+          description: URL slug of the associated show
+          example: bloomberg-surveillance
+        topics:
+          type: array
+          description: Topics or tags associated with the video
+          items:
+            type: string
+          example:
+            - Federal Reserve
+            - Interest Rates
+            - Monetary Policy
+        category:
+          type: string
+          description: Primary content category
+          enum:
+            - Markets
+            - Finance
+            - Technology
+            - Politics
+            - Economics
+            - Originals
+            - Interviews
+          example: Markets
+        participants:
+          type: array
+          description: People featured in the video
+          items:
+            $ref: '#/components/schemas/Participant'
+      required:
+        - id
+        - title
+        - duration
+    Participant:
+      type: object
+      description: A person featured in a video
+      properties:
+        name:
+          type: string
+          description: Full name of the participant
+          example: Jerome Powell
+        role:
+          type: string
+          description: Role or title of the participant
+          example: Federal Reserve Chair
+        type:
+          type: string
+          description: Participant type
+          enum:
+            - host
+            - guest
+            - correspondent
+          example: guest
+    SeriesListResponse:
+      type: object
+      description: List of Bloomberg Originals series
+      properties:
+        series:
+          type: array
+          description: List of original series
+          items:
+            $ref: '#/components/schemas/Series'
+        total:
+          type: integer
+          description: Total number of series
+          example: 30
+    Series:
+      type: object
+      description: A Bloomberg Originals series
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the series
+          example: bloomberg-technology
+        slug:
+          type: string
+          description: URL-friendly slug
+          example: bloomberg-technology
+        title:
+          type: string
+          description: Title of the series
+          example: Bloomberg Technology
+        description:
+          type: string
+          description: Description of the series
+          example: >-
+            Bloomberg Technology focuses on the people, companies
+            and ideas shaping our digital future.
+        imageUrl:
+          type: string
+          format: uri
+          description: Promotional image URL for the series
+        episodeCount:
+          type: integer
+          description: Total number of episodes in the series
+          example: 45
+        episodes:
+          type: array
+          description: List of episodes in the series
+          items:
+            $ref: '#/components/schemas/Episode'
+        url:
+          type: string
+          format: uri
+          description: URL to the series page
+          example: https://www.bloomberg.com/originals/bloomberg-technology
+      required:
+        - id
+        - title
+    Episode:
+      type: object
+      description: An episode within a series
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the episode
+          example: ep-bloomberg-tech-2026-03-04
+        slug:
+          type: string
+          description: URL-friendly slug for the episode
+          example: ai-revolution-episode-1
+        title:
+          type: string
+          description: Title of the episode
+          example: 'The AI Revolution: Episode 1'
+        description:
+          type: string
+          description: Description of the episode
+          example: >-
+            An in-depth look at how artificial intelligence is
+            transforming industries from healthcare to finance.
+        episodeNumber:
+          type: integer
+          description: Episode number within the series
+          example: 1
+        seasonNumber:
+          type: integer
+          description: Season number if applicable
+          example: 1
+        duration:
+          type: integer
+          description: Duration in seconds
+          example: 1500
+        publishedAt:
+          type: string
+          format: date-time
+          description: Publication timestamp
+          example: '2026-03-01T10:00:00-05:00'
+        thumbnailUrl:
+          type: string
+          format: uri
+          description: Episode thumbnail image URL
+        videoUrl:
+          type: string
+          format: uri
+          description: URL to the episode page
+          example: https://www.bloomberg.com/originals/bloomberg-technology/ai-revolution-episode-1
+      required:
+        - id
+        - title
+        - duration
+    Pagination:
+      type: object
+      description: Pagination metadata
+      properties:
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        limit:
+          type: integer
+          description: Number of items per page
+          example: 20
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 75
+        hasNext:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPrevious:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+    Error:
+      type: object
+      description: Error response
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 404
+        message:
+          type: string
+          description: Human-readable error message
+          example: Video not found
+        code:
+          type: string
+          description: Machine-readable error code
+          example: NOT_FOUND

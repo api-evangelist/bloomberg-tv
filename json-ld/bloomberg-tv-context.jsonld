@@ -1,0 +1,316 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "bloomberg": "https://www.bloomberg.com/schemas/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Stream": {
+      "@id": "bloomberg:Stream",
+      "@context": {
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "region": {
+          "@id": "bloomberg:region",
+          "@type": "xsd:string"
+        },
+        "contentType": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "isLive": {
+          "@id": "schema:isLiveBroadcast",
+          "@type": "xsd:boolean"
+        },
+        "cdnProvider": {
+          "@id": "bloomberg:cdnProvider",
+          "@type": "xsd:string"
+        },
+        "variants": {
+          "@id": "bloomberg:variants",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "StreamVariant": {
+      "@id": "bloomberg:StreamVariant",
+      "@context": {
+        "bandwidth": {
+          "@id": "schema:bitrate",
+          "@type": "xsd:integer"
+        },
+        "resolution": {
+          "@id": "schema:videoFrameSize",
+          "@type": "xsd:string"
+        },
+        "url": {
+          "@id": "schema:contentUrl",
+          "@type": "@id"
+        },
+        "codecs": {
+          "@id": "bloomberg:codecs",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "ScheduleEntry": {
+      "@id": "schema:BroadcastEvent",
+      "@context": {
+        "title": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "startTime": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "endTime": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:integer"
+        },
+        "isLive": {
+          "@id": "schema:isLiveBroadcast",
+          "@type": "xsd:boolean"
+        },
+        "hosts": {
+          "@id": "schema:actor",
+          "@container": "@list"
+        },
+        "showUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "region": {
+          "@id": "bloomberg:region",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Show": {
+      "@id": "schema:TVSeries",
+      "@context": {
+        "title": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "schema:genre",
+          "@type": "xsd:string"
+        },
+        "hosts": {
+          "@id": "schema:actor",
+          "@container": "@list"
+        },
+        "region": {
+          "@id": "bloomberg:region",
+          "@type": "xsd:string"
+        },
+        "schedule": {
+          "@id": "schema:broadcastSchedule",
+          "@type": "xsd:string"
+        },
+        "imageUrl": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "isActive": {
+          "@id": "bloomberg:isActive",
+          "@type": "xsd:boolean"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "Video": {
+      "@id": "schema:VideoObject",
+      "@context": {
+        "title": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:integer"
+        },
+        "publishedAt": {
+          "@id": "schema:datePublished",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        },
+        "thumbnailUrl": {
+          "@id": "schema:thumbnailUrl",
+          "@type": "@id"
+        },
+        "videoUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "show": {
+          "@id": "schema:partOfSeries",
+          "@type": "xsd:string"
+        },
+        "topics": {
+          "@id": "schema:keywords",
+          "@container": "@list"
+        },
+        "category": {
+          "@id": "schema:genre",
+          "@type": "xsd:string"
+        },
+        "participants": {
+          "@id": "schema:actor",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "Series": {
+      "@id": "schema:TVSeries",
+      "@context": {
+        "title": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "imageUrl": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "episodeCount": {
+          "@id": "schema:numberOfEpisodes",
+          "@type": "xsd:integer"
+        },
+        "episodes": {
+          "@id": "schema:episode",
+          "@container": "@list"
+        },
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "category": {
+          "@id": "schema:genre",
+          "@type": "xsd:string"
+        },
+        "isActive": {
+          "@id": "bloomberg:isActive",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Episode": {
+      "@id": "schema:TVEpisode",
+      "@context": {
+        "title": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "episodeNumber": {
+          "@id": "schema:episodeNumber",
+          "@type": "xsd:integer"
+        },
+        "seasonNumber": {
+          "@id": "schema:partOfSeason",
+          "@type": "xsd:integer"
+        },
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:integer"
+        },
+        "publishedAt": {
+          "@id": "schema:datePublished",
+          "@type": "xsd:dateTime"
+        },
+        "thumbnailUrl": {
+          "@id": "schema:thumbnailUrl",
+          "@type": "@id"
+        },
+        "videoUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Participant": {
+      "@id": "schema:Person",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "role": {
+          "@id": "schema:jobTitle",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "bloomberg:participantType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "BroadcastService": {
+      "@id": "schema:BroadcastService",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "broadcastDisplayName": {
+          "@id": "schema:broadcastDisplayName",
+          "@type": "xsd:string"
+        },
+        "broadcaster": {
+          "@id": "schema:broadcaster"
+        },
+        "area": {
+          "@id": "schema:areaServed"
+        }
+      }
+    }
+  }
+}

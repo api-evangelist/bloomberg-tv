@@ -1,0 +1,311 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg TV Live Stream API
+  description: >-
+    Provides access to Bloomberg Television live streaming content via HLS
+    (HTTP Live Streaming) manifests. Bloomberg TV delivers 24-hour coverage
+    of financial markets and business news across regional broadcasts
+    including US, Europe, and Asia. The streams are delivered through
+    Fastly CDN using adaptive bitrate HLS with multiple quality levels
+    ranging from 240kbps (320x180) to 1000kbps (1280x720).
+  version: 1.0.0
+  contact:
+    name: Bloomberg Media
+    email: feedback@bloomberg.net
+    url: https://www.bloomberg.com/contact
+  license:
+    name: Bloomberg Terms of Service
+    url: https://www.bloomberg.com/notices/tos
+  termsOfService: https://www.bloomberg.com/notices/tos
+servers:
+  - url: https://www.bloomberg.com
+    description: Bloomberg Media Manifest Server
+  - url: https://liveproduseast.global.ssl.fastly.net
+    description: Fastly CDN - US East
+  - url: https://liveprodeuwest.global.ssl.fastly.net
+    description: Fastly CDN - EU West
+externalDocs:
+  description: Bloomberg TV Live
+  url: https://www.bloomberg.com/live
+tags:
+  - name: Streams
+    description: Live HLS streaming manifest endpoints
+  - name: Regions
+    description: Regional live stream access
+paths:
+  /media-manifest/streams/phoenix-us.m3u8:
+    get:
+      operationId: getUSLiveStreamManifest
+      summary: Get US live stream HLS manifest
+      description: >-
+        Retrieves the HLS master playlist manifest for the Bloomberg TV US
+        live stream. The manifest contains references to multiple adaptive
+        bitrate stream variants at different quality levels. The stream
+        provides 24-hour coverage of US financial markets and business news
+        programming including shows such as Bloomberg Surveillance,
+        Bloomberg Markets, and Bloomberg Technology.
+      tags:
+        - Streams
+        - Regions
+      responses:
+        '200':
+          description: HLS master playlist manifest returned successfully
+          content:
+            application/vnd.apple.mpegurl:
+              schema:
+                type: string
+                description: >-
+                  M3U8 master playlist containing stream variant references
+                  with bandwidth and resolution metadata for adaptive
+                  bitrate playback.
+              examples:
+                masterPlaylist:
+                  summary: HLS master playlist example
+                  value: |
+                    #EXTM3U
+                    #EXT-X-STREAM-INF:BANDWIDTH=240000,RESOLUTION=320x180
+                    stream_240.m3u8
+                    #EXT-X-STREAM-INF:BANDWIDTH=440000,RESOLUTION=480x270
+                    stream_440.m3u8
+                    #EXT-X-STREAM-INF:BANDWIDTH=700000,RESOLUTION=640x360
+                    stream_700.m3u8
+                    #EXT-X-STREAM-INF:BANDWIDTH=1000000,RESOLUTION=1280x720
+                    stream_1000.m3u8
+          headers:
+            Cache-Control:
+              description: Cache control directive for manifest freshness
+              schema:
+                type: string
+                example: max-age=2
+            Content-Type:
+              description: Content type of the manifest
+              schema:
+                type: string
+                example: application/vnd.apple.mpegurl
+        '403':
+          description: Access forbidden due to geo-restrictions or authentication requirements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Stream not currently available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Stream temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /media-manifest/streams/phoenix-eu.m3u8:
+    get:
+      operationId: getEuropeLiveStreamManifest
+      summary: Get Europe live stream HLS manifest
+      description: >-
+        Retrieves the HLS master playlist manifest for the Bloomberg TV
+        Europe live stream. Provides coverage of European financial markets,
+        business news, and economic developments with programming tailored
+        to European trading hours and regional market activity.
+      tags:
+        - Streams
+        - Regions
+      responses:
+        '200':
+          description: HLS master playlist manifest returned successfully
+          content:
+            application/vnd.apple.mpegurl:
+              schema:
+                type: string
+                description: >-
+                  M3U8 master playlist containing stream variant references
+                  for the European regional broadcast.
+          headers:
+            Cache-Control:
+              description: Cache control directive for manifest freshness
+              schema:
+                type: string
+                example: max-age=2
+            Content-Type:
+              description: Content type of the manifest
+              schema:
+                type: string
+                example: application/vnd.apple.mpegurl
+        '403':
+          description: Access forbidden due to geo-restrictions or authentication requirements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Stream not currently available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Stream temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /media-manifest/streams/phoenix-asia.m3u8:
+    get:
+      operationId: getAsiaLiveStreamManifest
+      summary: Get Asia live stream HLS manifest
+      description: >-
+        Retrieves the HLS master playlist manifest for the Bloomberg TV
+        Asia live stream. Provides coverage of Asian financial markets,
+        business news, and economic developments with programming tailored
+        to Asian trading hours and regional market activity.
+      tags:
+        - Streams
+        - Regions
+      responses:
+        '200':
+          description: HLS master playlist manifest returned successfully
+          content:
+            application/vnd.apple.mpegurl:
+              schema:
+                type: string
+                description: >-
+                  M3U8 master playlist containing stream variant references
+                  for the Asian regional broadcast.
+          headers:
+            Cache-Control:
+              description: Cache control directive for manifest freshness
+              schema:
+                type: string
+                example: max-age=2
+            Content-Type:
+              description: Content type of the manifest
+              schema:
+                type: string
+                example: application/vnd.apple.mpegurl
+        '403':
+          description: Access forbidden due to geo-restrictions or authentication requirements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Stream not currently available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Stream temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /us/Channel-USTV-AWS-virginia-1/Source-USTV-1000-1_live.m3u8:
+    get:
+      operationId: getUSStreamVariant
+      summary: Get US stream variant playlist
+      description: >-
+        Retrieves an individual HLS media playlist for a specific bitrate
+        variant of the US live stream. This endpoint is served from the
+        Fastly CDN (liveproduseast.global.ssl.fastly.net) and contains
+        the actual transport stream segment references for video playback.
+        Segment playlists are refreshed continuously as new segments
+        become available during the live broadcast.
+      tags:
+        - Streams
+      servers:
+        - url: https://liveproduseast.global.ssl.fastly.net
+          description: Fastly CDN - US East
+      responses:
+        '200':
+          description: HLS media playlist with transport stream segments
+          content:
+            application/vnd.apple.mpegurl:
+              schema:
+                type: string
+                description: >-
+                  M3U8 media playlist containing transport stream segment
+                  references for sequential playback.
+          headers:
+            Cache-Control:
+              description: >-
+                Short-lived cache TTL, typically less than half the segment
+                duration for live streams
+              schema:
+                type: string
+                example: max-age=1
+        '404':
+          description: Stream variant not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    StreamManifest:
+      type: object
+      description: Metadata about an HLS stream manifest
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL to the M3U8 manifest file
+          example: https://www.bloomberg.com/media-manifest/streams/phoenix-us.m3u8
+        region:
+          type: string
+          description: Regional broadcast identifier
+          enum:
+            - us
+            - eu
+            - asia
+          example: us
+        type:
+          type: string
+          description: Manifest type
+          enum:
+            - master
+            - media
+          example: master
+        contentType:
+          type: string
+          description: MIME type of the manifest
+          example: application/vnd.apple.mpegurl
+    StreamVariant:
+      type: object
+      description: A stream variant within an HLS master playlist
+      properties:
+        bandwidth:
+          type: integer
+          description: Peak bandwidth of the stream variant in bits per second
+          example: 1000000
+        resolution:
+          type: string
+          description: Video resolution of the stream variant
+          example: 1280x720
+        url:
+          type: string
+          format: uri
+          description: URL to the media playlist for this variant
+          example: https://liveproduseast.global.ssl.fastly.net/us/Channel-USTV-AWS-virginia-1/Source-USTV-1000-1_live.m3u8
+        codecs:
+          type: string
+          description: Codec information string
+          example: avc1.4d401f,mp4a.40.2
+    Error:
+      type: object
+      description: Error response
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 404
+        message:
+          type: string
+          description: Human-readable error message
+          example: Stream not currently available
+        code:
+          type: string
+          description: Machine-readable error code
+          example: STREAM_UNAVAILABLE

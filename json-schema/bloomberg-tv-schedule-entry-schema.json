@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.bloomberg.com/schemas/bloomberg-tv-schedule-entry.json",
+  "title": "Bloomberg TV Schedule Entry",
+  "description": "Represents a single program entry in the Bloomberg TV programming schedule, including show metadata, air times, hosts, and broadcast details for a specific regional lineup.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the schedule entry",
+      "examples": [
+        "sched-2026-03-04-surveillance-0600"
+      ]
+    },
+    "showId": {
+      "type": "string",
+      "description": "Identifier for the associated show or series",
+      "examples": [
+        "bloomberg-surveillance"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the program airing in this time slot",
+      "examples": [
+        "Bloomberg Surveillance"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the specific episode or program content",
+      "examples": [
+        "Jonathan Ferro, Lisa Abramowicz and Annmarie Hordern cover the latest in global markets, economics, and geopolitics with interviews from industry leaders."
+      ]
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled start time in ISO 8601 format with timezone offset",
+      "examples": [
+        "2026-03-04T06:00:00-05:00"
+      ]
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled end time in ISO 8601 format with timezone offset",
+      "examples": [
+        "2026-03-04T09:00:00-05:00"
+      ]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the program in minutes",
+      "minimum": 1,
+      "examples": [
+        180
+      ]
+    },
+    "region": {
+      "type": "string",
+      "description": "Regional broadcast this entry belongs to",
+      "enum": [
+        "us",
+        "europe",
+        "asia"
+      ],
+      "examples": [
+        "us"
+      ]
+    },
+    "hosts": {
+      "type": "array",
+      "description": "List of hosts or anchors for the program",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "Jonathan Ferro",
+          "Lisa Abramowicz",
+          "Annmarie Hordern"
+        ]
+      ]
+    },
+    "isLive": {
+      "type": "boolean",
+      "description": "Whether this is a live broadcast or a replay/rerun",
+      "examples": [
+        true
+      ]
+    },
+    "isReplay": {
+      "type": "boolean",
+      "description": "Whether this is a replay of a previously aired program",
+      "examples": [
+        false
+      ]
+    },
+    "showUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the show page on Bloomberg",
+      "examples": [
+        "https://www.bloomberg.com/btv/series/bloomberg-surveillance"
+      ]
+    }
+  },
+  "required": [
+    "title",
+    "startTime",
+    "endTime"
+  ]
+}

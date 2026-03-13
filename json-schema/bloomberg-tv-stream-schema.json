@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.bloomberg.com/schemas/bloomberg-tv-stream.json",
+  "title": "Bloomberg TV Stream",
+  "description": "Represents a Bloomberg TV live stream with HLS manifest metadata, including regional broadcast information, adaptive bitrate variants, and CDN delivery details.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the HLS master playlist M3U8 manifest file",
+      "examples": [
+        "https://www.bloomberg.com/media-manifest/streams/phoenix-us.m3u8"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "description": "Regional broadcast identifier indicating which geographic market the stream serves",
+      "enum": [
+        "us",
+        "eu",
+        "asia"
+      ],
+      "examples": [
+        "us"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Manifest type indicating whether this is a master playlist or a media playlist",
+      "enum": [
+        "master",
+        "media"
+      ],
+      "examples": [
+        "master"
+      ]
+    },
+    "contentType": {
+      "type": "string",
+      "description": "MIME type of the HLS manifest",
+      "const": "application/vnd.apple.mpegurl",
+      "examples": [
+        "application/vnd.apple.mpegurl"
+      ]
+    },
+    "variants": {
+      "type": "array",
+      "description": "Available stream variants at different quality levels for adaptive bitrate playback",
+      "items": {
+        "$ref": "#/$defs/StreamVariant"
+      }
+    },
+    "cdnProvider": {
+      "type": "string",
+      "description": "Content delivery network provider serving the stream",
+      "examples": [
+        "Fastly"
+      ]
+    },
+    "isLive": {
+      "type": "boolean",
+      "description": "Whether the stream is currently broadcasting live content",
+      "examples": [
+        true
+      ]
+    }
+  },
+  "required": [
+    "url",
+    "region",
+    "type"
+  ],
+  "$defs": {
+    "StreamVariant": {
+      "type": "object",
+      "description": "A stream variant within an HLS master playlist representing a specific quality level",
+      "properties": {
+        "bandwidth": {
+          "type": "integer",
+          "description": "Peak bandwidth of the stream variant in bits per second",
+          "examples": [
+            240000,
+            440000,
+            700000,
+            1000000
+          ]
+        },
+        "resolution": {
+          "type": "string",
+          "description": "Video resolution of the stream variant in WIDTHxHEIGHT format",
+          "pattern": "^\\d+x\\d+$",
+          "examples": [
+            "320x180",
+            "480x270",
+            "640x360",
+            "1280x720"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the media playlist for this variant",
+          "examples": [
+            "https://liveproduseast.global.ssl.fastly.net/us/Channel-USTV-AWS-virginia-1/Source-USTV-1000-1_live.m3u8"
+          ]
+        },
+        "codecs": {
+          "type": "string",
+          "description": "Codec information string for the variant",
+          "examples": [
+            "avc1.4d401f,mp4a.40.2"
+          ]
+        }
+      },
+      "required": [
+        "bandwidth",
+        "url"
+      ]
+    }
+  }
+}

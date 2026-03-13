@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.bloomberg.com/schemas/bloomberg-tv-show.json",
+  "title": "Bloomberg TV Show",
+  "description": "Represents a Bloomberg TV show or series, including metadata about the program, its hosts, schedule, regional broadcast, and category. Covers Bloomberg Television shows such as Bloomberg Surveillance, Bloomberg Markets, Bloomberg Technology, and Bloomberg Originals series.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the show",
+      "examples": [
+        "bloomberg-surveillance"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly slug identifier for the show",
+      "pattern": "^[a-z0-9-]+$",
+      "examples": [
+        "bloomberg-surveillance"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the show",
+      "examples": [
+        "Bloomberg Surveillance"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Full description of the show and its editorial focus",
+      "examples": [
+        "Connecting the dots across business, finance, economics and politics with conversations with leaders from Wall Street to Washington and beyond."
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Primary content category or genre of the show",
+      "enum": [
+        "Markets",
+        "Finance",
+        "Technology",
+        "Politics",
+        "Economics",
+        "Originals"
+      ],
+      "examples": [
+        "Markets"
+      ]
+    },
+    "hosts": {
+      "type": "array",
+      "description": "Regular hosts or anchors of the show",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "Jonathan Ferro",
+          "Lisa Abramowicz",
+          "Annmarie Hordern"
+        ]
+      ]
+    },
+    "region": {
+      "type": "string",
+      "description": "Primary regional broadcast market for this show",
+      "enum": [
+        "us",
+        "europe",
+        "asia",
+        "global"
+      ],
+      "examples": [
+        "us"
+      ]
+    },
+    "schedule": {
+      "type": "string",
+      "description": "Human-readable description of the typical air schedule",
+      "examples": [
+        "Weekdays 6:00 AM - 9:00 AM ET"
+      ]
+    },
+    "imageUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the show thumbnail or promotional image"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the show page on Bloomberg",
+      "examples": [
+        "https://www.bloomberg.com/btv/series/bloomberg-surveillance"
+      ]
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Whether the show is currently in production and airing new episodes",
+      "examples": [
+        true
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags or keywords associated with the show",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "Markets",
+          "Finance",
+          "Economics",
+          "Interviews"
+        ]
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "title"
+  ]
+}

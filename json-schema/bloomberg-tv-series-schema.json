@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.bloomberg.com/schemas/bloomberg-tv-series.json",
+  "title": "Bloomberg TV Series",
+  "description": "Represents a Bloomberg Originals or Bloomberg TV series, which is a collection of related episodes produced as a cohesive editorial product. Series span topics including technology, business innovation, culture, and global economics.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the series",
+      "examples": [
+        "bloomberg-technology"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly slug identifier for the series",
+      "pattern": "^[a-z0-9-]+$",
+      "examples": [
+        "bloomberg-technology"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the series",
+      "examples": [
+        "Bloomberg Technology"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Full description of the series and its editorial focus",
+      "examples": [
+        "Bloomberg Technology focuses on the people, companies and ideas shaping our digital future."
+      ]
+    },
+    "imageUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Promotional image URL for the series"
+    },
+    "episodeCount": {
+      "type": "integer",
+      "description": "Total number of episodes available in the series",
+      "minimum": 0,
+      "examples": [
+        45
+      ]
+    },
+    "episodes": {
+      "type": "array",
+      "description": "List of episodes in the series",
+      "items": {
+        "$ref": "#/$defs/Episode"
+      }
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the series page on Bloomberg",
+      "examples": [
+        "https://www.bloomberg.com/originals/bloomberg-technology"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Content category of the series",
+      "examples": [
+        "Technology"
+      ]
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Whether the series is currently producing new episodes",
+      "examples": [
+        true
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "title"
+  ],
+  "$defs": {
+    "Episode": {
+      "type": "object",
+      "description": "An episode within a series",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the episode",
+          "examples": [
+            "ep-bloomberg-tech-2026-03-04"
+          ]
+        },
+        "slug": {
+          "type": "string",
+          "description": "URL-friendly slug for the episode",
+          "examples": [
+            "ai-revolution-episode-1"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the episode",
+          "examples": [
+            "The AI Revolution: Episode 1"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the episode content",
+          "examples": [
+            "An in-depth look at how artificial intelligence is transforming industries from healthcare to finance."
+          ]
+        },
+        "episodeNumber": {
+          "type": "integer",
+          "description": "Episode number within the series or season",
+          "minimum": 1,
+          "examples": [
+            1
+          ]
+        },
+        "seasonNumber": {
+          "type": "integer",
+          "description": "Season number if the series uses seasons",
+          "minimum": 1,
+          "examples": [
+            1
+          ]
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Duration of the episode in seconds",
+          "minimum": 0,
+          "examples": [
+            1500
+          ]
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Publication timestamp in ISO 8601 format",
+          "examples": [
+            "2026-03-01T10:00:00-05:00"
+          ]
+        },
+        "thumbnailUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Episode thumbnail image URL"
+        },
+        "videoUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the episode page",
+          "examples": [
+            "https://www.bloomberg.com/originals/bloomberg-technology/ai-revolution-episode-1"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "duration"
+      ]
+    }
+  }
+}
