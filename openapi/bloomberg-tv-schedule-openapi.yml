@@ -33,7 +33,7 @@ paths:
   /live/schedule/{region}:
     get:
       operationId: getScheduleByRegion
-      summary: Get TV schedule for a specific region
+      summary: Bloomberg TV Get TV schedule for a specific region
       description: >-
         Retrieves the Bloomberg TV programming schedule for a given
         regional broadcast. Returns the daily lineup of shows with
@@ -87,7 +87,7 @@ paths:
   /live/schedule-shows:
     get:
       operationId: getScheduleShows
-      summary: Get all scheduled shows
+      summary: Bloomberg TV Get all scheduled shows
       description: >-
         Retrieves a consolidated listing of all Bloomberg TV shows
         that appear in the programming schedule. Provides metadata
@@ -144,7 +144,7 @@ paths:
   /btv/series/{showSlug}:
     get:
       operationId: getShowBySlug
-      summary: Get details for a specific show
+      summary: Bloomberg TV Get details for a specific show
       description: >-
         Retrieves detailed information about a specific Bloomberg TV
         show or series identified by its URL slug. Returns show

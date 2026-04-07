@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Bloomberg Video On Demand API
+  title: Bloomberg TV Bloomberg Video On Demand API
   description: >-
     Provides access to Bloomberg TV's video archive and on-demand content
     library. Includes show clips, full interviews, documentaries, and
@@ -34,7 +34,7 @@ paths:
   /videos:
     get:
       operationId: listVideos
-      summary: List available video content
+      summary: Bloomberg TV List available video content
       description: >-
         Retrieves a paginated listing of Bloomberg video content including
         recent clips, interviews, show segments, and featured videos.
@@ -98,7 +98,7 @@ paths:
   /video/{videoId}:
     get:
       operationId: getVideoById
-      summary: Get a specific video by identifier
+      summary: Bloomberg TV Get a specific video by identifier
       description: >-
         Retrieves detailed metadata and playback information for a
         specific video identified by its unique video ID or slug.
@@ -140,7 +140,7 @@ paths:
   /originals:
     get:
       operationId: listOriginalSeries
-      summary: List Bloomberg Originals series
+      summary: Bloomberg TV List Bloomberg Originals series
       description: >-
         Retrieves the catalog of Bloomberg Originals video series.
         Bloomberg Originals are documentary-style and feature series
@@ -169,7 +169,7 @@ paths:
   /originals/{seriesSlug}:
     get:
       operationId: getOriginalSeriesBySlug
-      summary: Get details for a specific Originals series
+      summary: Bloomberg TV Get details for a specific Originals series
       description: >-
         Retrieves detailed information and episode listing for a
         specific Bloomberg Originals series identified by its URL
@@ -211,7 +211,7 @@ paths:
   /originals/{seriesSlug}/{episodeSlug}:
     get:
       operationId: getOriginalEpisode
-      summary: Get a specific Originals episode
+      summary: Bloomberg TV Get a specific Originals episode
       description: >-
         Retrieves detailed metadata and playback information for a
         specific episode within a Bloomberg Originals series. Returns

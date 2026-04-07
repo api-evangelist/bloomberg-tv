@@ -36,7 +36,7 @@ paths:
   /media-manifest/streams/phoenix-us.m3u8:
     get:
       operationId: getUSLiveStreamManifest
-      summary: Get US live stream HLS manifest
+      summary: Bloomberg TV Get US live stream HLS manifest
       description: >-
         Retrieves the HLS master playlist manifest for the Bloomberg TV US
         live stream. The manifest contains references to multiple adaptive
@@ -103,7 +103,7 @@ paths:
   /media-manifest/streams/phoenix-eu.m3u8:
     get:
       operationId: getEuropeLiveStreamManifest
-      summary: Get Europe live stream HLS manifest
+      summary: Bloomberg TV Get Europe live stream HLS manifest
       description: >-
         Retrieves the HLS master playlist manifest for the Bloomberg TV
         Europe live stream. Provides coverage of European financial markets,
@@ -154,7 +154,7 @@ paths:
   /media-manifest/streams/phoenix-asia.m3u8:
     get:
       operationId: getAsiaLiveStreamManifest
-      summary: Get Asia live stream HLS manifest
+      summary: Bloomberg TV Get Asia live stream HLS manifest
       description: >-
         Retrieves the HLS master playlist manifest for the Bloomberg TV
         Asia live stream. Provides coverage of Asian financial markets,
@@ -205,7 +205,7 @@ paths:
   /us/Channel-USTV-AWS-virginia-1/Source-USTV-1000-1_live.m3u8:
     get:
       operationId: getUSStreamVariant
-      summary: Get US stream variant playlist
+      summary: Bloomberg TV Get US stream variant playlist
       description: >-
         Retrieves an individual HLS media playlist for a specific bitrate
         variant of the US live stream. This endpoint is served from the
