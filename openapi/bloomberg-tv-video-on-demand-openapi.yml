@@ -24,12 +24,10 @@ externalDocs:
   description: Bloomberg Videos
   url: https://www.bloomberg.com/videos
 tags:
-  - name: Videos
-    description: Video content discovery and retrieval
   - name: Series
     description: Original series and show episodes
-  - name: Categories
-    description: Video category browsing
+  - name: Videos
+    description: Video content discovery and retrieval
 paths:
   /videos:
     get:

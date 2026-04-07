@@ -28,10 +28,10 @@ externalDocs:
   description: Bloomberg TV Live
   url: https://www.bloomberg.com/live
 tags:
-  - name: Streams
-    description: Live HLS streaming manifest endpoints
   - name: Regions
     description: Regional live stream access
+  - name: Streams
+    description: Live HLS streaming manifest endpoints
 paths:
   /media-manifest/streams/phoenix-us.m3u8:
     get:
@@ -45,8 +45,8 @@ paths:
         programming including shows such as Bloomberg Surveillance,
         Bloomberg Markets, and Bloomberg Technology.
       tags:
-        - Streams
         - Regions
+        - Streams
       responses:
         '200':
           description: HLS master playlist manifest returned successfully
@@ -110,8 +110,8 @@ paths:
         business news, and economic developments with programming tailored
         to European trading hours and regional market activity.
       tags:
-        - Streams
         - Regions
+        - Streams
       responses:
         '200':
           description: HLS master playlist manifest returned successfully
@@ -161,8 +161,8 @@ paths:
         business news, and economic developments with programming tailored
         to Asian trading hours and regional market activity.
       tags:
-        - Streams
         - Regions
+        - Streams
       responses:
         '200':
           description: HLS master playlist manifest returned successfully
