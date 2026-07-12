@@ -53,6 +53,8 @@ apis:
     - type: Documentation
       url: https://www.bloomberg.com/live/
 common:
+  - type: DomainSecurity
+    url: security/bloomberg-tv-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/bloombergtelevision
   - type: Portal
