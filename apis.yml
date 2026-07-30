@@ -7,7 +7,19 @@ description: Bloomberg TV is a 24-hour global business and financial news televi
   market open and close coverage, special event programming, and on-demand content
   access.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomberg-tv.png
 url: https://raw.githubusercontent.com/api-evangelist/bloomberg-tv/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-04-21'
