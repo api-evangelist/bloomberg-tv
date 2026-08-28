@@ -5,6 +5,17 @@ description: Bloomberg TV is a 24-hour global business and financial news televi
   through cable, satellite, digital streaming, and over-the-top (OTT) platforms. The network provides live market
   open and close coverage, special event programming, and on-demand content access.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
