@@ -74,6 +74,12 @@ apis:
   - type: Documentation
     url: https://www.bloomberg.com/live/
 common:
+- type: Plans
+  url: plans/bloomberg-tv-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/bloomberg-tv-rate-limits.yml
+- type: FinOps
+  url: finops/bloomberg-tv-finops.yml
 - type: Website
   url: https://bloomberg.com
 - type: ParentCompany
