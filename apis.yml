@@ -52,6 +52,12 @@ apis:
   baseURL: https://api.bloomberg.com/tv
   tags:
   - TV Content
+  - Live Streaming
+  - Video
+  - On-Demand
+  - Media Distribution
+  tags_raw:
+  - TV Content
   - Live Stream
   - Video
   - On-Demand
@@ -66,6 +72,11 @@ apis:
   humanURL: https://www.bloomberg.com/live/
   baseURL: https://embed.bloomberg.com/tv
   tags:
+  - Embed
+  - Live Streaming
+  - Video Player
+  - Web Integration
+  tags_raw:
   - Embed
   - Live Stream
   - Video Player
