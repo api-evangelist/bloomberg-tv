@@ -64,19 +64,106 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bloomberg TV is a 24-hour global business and financial news television network delivering real-time market coverage, business news, executive interviews, and economic analysis via cable, satellite, digital streaming, and OTT platforms.
+Bloomberg TV is a 24-hour global business and financial news television network delivering real-time market coverage, business news, executive interviews, and economic analysis. Bloomberg TV reaches a global audience through cable, satellite, digital streaming, and over-the-top (OTT) platforms. The network provides live market open and close coverage, special event programming, and on-demand content access.
 
-## APIs
+**Areas:** Bloomberg TV · Television · Financial News · Media · Streaming · Live Coverage · Bloomberg
 
-- **Bloomberg TV Content API** - Video content and live stream for licensed distribution
-- **Bloomberg TV Embed API** - Embed Bloomberg TV on licensed digital properties
+## Bloomberg TV on APIs.io
 
-## Resources
+Everything profiled for Bloomberg TV is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bloomberg-tv/](https://apis.io/providers/bloomberg-tv/)** — or go straight to one of the APIs or properties below.
 
-- [Bloomberg Live](https://www.bloomberg.com/live/)
-- [Bloomberg Media Distribution](https://www.bloomberg.com/media-distribution/)
-- [Bloomberg Professional Portal](https://www.bloomberg.com/professional/)
+### APIs (2)
 
-## Profile
+- [Bloomberg TV Content API](https://apis.io/apis/bloomberg-tv/bloomberg-tv-api/) — Access Bloomberg TV video content, live stream, and on-demand clips for licensed distribution. Provides access to market coverage segments, interviews, and…
+- [Bloomberg TV Embed API](https://apis.io/apis/bloomberg-tv/bloomberg-tv-embed/) — Embed Bloomberg TV live stream and video clips on licensed digital properties using Bloomberg's embed API. Supports customizable player integration for…
 
-See [apis.yml](apis.yml) for the full API profile.
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Bloomberg Tv Domain Security](https://apis.io/security/bloomberg-tv/bloomberg-tv-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Bloomberg Tv Plans Pricing](https://apis.io/plans/bloomberg-tv/bloomberg-tv-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Bloomberg Tv Rate Limits](https://apis.io/rate-limits/bloomberg-tv/bloomberg-tv-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Bloomberg Tv Finops](https://apis.io/finops/bloomberg-tv/bloomberg-tv-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://bloomberg.com)
+- [Documentation](https://www.bloomberg.com/live/)
+- [Support](https://www.bloomberg.com/professional/support/)
+- [Terms of service](https://www.bloomberg.com/notices/tos/)
+- [Privacy policy](https://www.bloomberg.com/privacy/)
+
+## API Evangelist rating
+
+**Kin Score 18.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 28.9 |
+
+**Agent readiness 0.6** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 13.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bloomberg-tv/](https://apis.io/providers/bloomberg-tv/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Bloomberg TV: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bloomberg-tv/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
